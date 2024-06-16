@@ -2,6 +2,12 @@
 #include <string>
 #include <vector>
 
+struct KeyPressed
+{
+	bool state = false;
+	char key;
+};
+
 struct Position
 {
 	int row;
@@ -27,14 +33,16 @@ public:
 	static const int COLUMNS = 9;
 	static const int ROWS = 8;
 	static const int MAX_ELEMENTS = COLUMNS * ROWS;
+	static const char EMPTY_KEY = ' ';
 
 	void OnInit();
-	void OnInput();
+	void OnInput(char inputKey);
 	bool OnUpdate(float deltaTime);
 	void OnRender();
 	void OnShutdown();
 
 private:
+	KeyPressed m_keyState = KeyPressed{ false, EMPTY_KEY };
 	std::string m_word;
 	std::vector<std::string> m_wordsPool = { "kolor", "silnik", "wzorzec", "silnie", "kanapka" };
 	std::vector<bool> m_guessedLetters;

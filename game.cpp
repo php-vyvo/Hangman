@@ -21,9 +21,12 @@ void Game::OnInit()
 	m_failAnswerCount = 0;
 }
 
-void Game::OnInput()
+void Game::OnInput(char inputKey)
 {
-
+	if (inputKey != EMPTY_KEY) {
+		m_keyState = KeyPressed{ true, (char)toupper(inputKey) };
+		m_gameState = GameState::UPDATE;
+	}
 }
 
 bool Game::OnUpdate(float deltaTime)
