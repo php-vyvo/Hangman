@@ -13,16 +13,15 @@ void Render();
 void Shutdown();
 char getKeyboardInput();
 
-bool g_exitGame = false;
+bool g_exitGame = true;
 Game g_game;
 std::future<char> future;
 
 int main()
 {
-
 	Initialize();
 
-	while (g_exitGame)
+	while (!g_exitGame)
 	{
 		GetInput();
 		Update(0.0f);
@@ -39,6 +38,8 @@ void Initialize()
 	future = std::async(std::launch::async, getKeyboardInput);
 
 	g_game.OnInit();
+
+	g_exitGame = false;
 }
 
 void GetInput()
