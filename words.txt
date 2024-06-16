@@ -1,0 +1,11 @@
+kolor
+silnik
+wzorzec
+silnie
+kanapka
+opona
+rezerwat
+tablica
+portfel
+myjnia
+sklep

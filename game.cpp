@@ -2,13 +2,17 @@
 #include <cstdlib>
 #include <ctime>
 #include <iostream>
+#include <fstream>
+#include <algorithm>
+
+const std::string Game::FILE_PATH = "words.txt";
 
 void Game::OnInit()
 {
+	loadWordsFromFile();
+	selectWord();
+
 	m_guessedLetters.clear();
-	srand(std::time(NULL));
-	int randomIndex = rand() % m_wordsPool.size();
-	m_word = m_wordsPool[randomIndex];
 
 	m_hangmanBox.reserve(Game::MAX_ELEMENTS);
 
@@ -56,4 +60,27 @@ void Game::OnRender()
 void Game::OnShutdown()
 {
 	m_guessedLetters.clear();
+}
+
+void Game::loadWordsFromFile()
+{
+	m_wordsPool.clear();
+	
+		std::ifstream wordsStream(FILE_PATH);
+	
+		std::string word;
+	
+		while (std::getline(wordsStream, word)) {
+		m_wordsPool.push_back(word);
+	}
+	
+	wordsStream.close();
+}
+
+void Game::selectWord()
+{
+	srand(std::time(NULL));
+	int randomIndex = rand() % m_wordsPool.size();
+	m_word = m_wordsPool[randomIndex];
+	std::transform(m_word.begin(), m_word.end(), m_word.begin(), ::toupper);
 }

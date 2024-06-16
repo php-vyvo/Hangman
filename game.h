@@ -34,6 +34,7 @@ public:
 	static const int ROWS = 8;
 	static const int MAX_ELEMENTS = COLUMNS * ROWS;
 	static const char EMPTY_KEY = ' ';
+	static const std::string FILE_PATH;
 
 	void OnInit();
 	void OnInput(char inputKey);
@@ -42,9 +43,12 @@ public:
 	void OnShutdown();
 
 private:
+	void loadWordsFromFile();
+	void selectWord();
+
 	KeyPressed m_keyState = KeyPressed{ false, EMPTY_KEY };
 	std::string m_word;
-	std::vector<std::string> m_wordsPool = { "kolor", "silnik", "wzorzec", "silnie", "kanapka" };
+	std::vector<std::string> m_wordsPool;
 	std::vector<bool> m_guessedLetters;
 	GameState m_gameState = GameState::START;
 	int m_failAnswerCount;
