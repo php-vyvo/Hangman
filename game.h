@@ -45,12 +45,18 @@ public:
 private:
 	void loadWordsFromFile();
 	void selectWord();
+	void updateAfterKeyPressed();
+	void onFailAnswer();
+	int checkCurrentAnswer();
+	void prepareGuessedLetters();
+	void prepareHangman();
 
 	KeyPressed m_keyState = KeyPressed{ false, EMPTY_KEY };
 	std::string m_word;
 	std::vector<std::string> m_wordsPool;
 	std::vector<bool> m_guessedLetters;
 	GameState m_gameState = GameState::START;
+	bool m_winner = false;
 	int m_failAnswerCount;
 	int m_answerFail = false;
 	std::vector<std::vector<HangmanPart>> m_hangman{ 
